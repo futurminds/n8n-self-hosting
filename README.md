@@ -2,6 +2,8 @@
 
 This guide provides step-by-step instructions to self-host [n8n](https://n8n.io), a free and open-source workflow automation tool, on a Linux server using Docker, Nginx, and Certbot for SSL with a custom domain name.
 
+Youtube Video Explanation: https://www.youtube.com/watch?v=Temh_Ddxp24
+
 ## Step 1: Installing Docker
 
 1. **Update the Package Index:**
