@@ -31,8 +31,22 @@ Run the following command to start n8n in Docker. Replace your-domain.com with y
     sudo docker run -d --restart unless-stopped -it \
     --name n8n \
     -p 5678:5678 \
-    -e N8N_HOST="https://your-domain.com" \
+    -e N8N_HOST="your-domain.com" \
     -e WEBHOOK_TUNNEL_URL="https://your-domain.com/" \
+    -e WEBHOOK_URL="https://your-domain.com/" \
+    -v ~/.n8n:/root/.n8n \
+    n8nio/n8n
+    ```
+
+Or if you are using a subdomain, it should look like this:
+
+    ```bash
+    sudo docker run -d --restart unless-stopped -it \
+    --name n8n \
+    -p 5678:5678 \
+    -e N8N_HOST="subdomain.your-domain.com" \
+    -e WEBHOOK_TUNNEL_URL="https://subdomain.your-domain.com/" \
+    -e WEBHOOK_URL="https://subdomain.your-domain.com/" \
     -v ~/.n8n:/root/.n8n \
     n8nio/n8n
     ```
@@ -70,7 +84,6 @@ Configure Nginx to reverse proxy the n8n web interface:
 
         location / {
             proxy_pass http://localhost:5678;
-            proxy_set_header Connection '';
             proxy_http_version 1.1;
             chunked_transfer_encoding off;
             proxy_buffering off;
