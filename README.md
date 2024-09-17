@@ -118,6 +118,26 @@ Certbot will obtain and install an SSL certificate from Let's Encrypt.
 Follow the on-screen instructions to complete the SSL setup.
 Once completed, n8n will be accessible securely over HTTPS at your-domain.com.
 
+## How to update n8n:
+
+You can follow the instructions here to update the version: https://docs.n8n.io/hosting/installation/docker/#updating
+
+Important: Take a backup of ~/.n8n:/home/node/.n8n
+To create a backup, you can copy ~/.n8n:/home/node/.n8n to your local or another directory on the same VM even before deleting the container. And then, after updating and spinning up a new container, if you see the data getting lost, you can replace ~/.n8n:/home/node/.n8n with the one you saved earlier.
+
+Ensure that your n8n instance is using a persistent volume or a mapped directory for its data storage. This is crucial because the workflows, user accounts, and configurations are stored in the database file (typically database.sqlite), which should be located in a directory that remains intact even when the container is removed.
+In your docker-compose.yml, you should have something like this:
+```bash
+volumes:
+- ~/.n8n:/home/node/.n8n
+```
+
+This mapping ensures that the .n8n directory on your host machine is used for data storage, preserving your workflows and configurations across container updates.
+
+When you stop and remove the n8n container, you are only deleting the container instance itself, not the data stored in the persistent volume. As long as the volume is correctly configured, your workflows and accounts should remain unaffected.
+
+But to avoid any chance of data loss you should take a backup of ~/.n8n:/home/node/.n8n before removing the container.
+
 ## Important Notes
 - Ensure your domain's DNS A record points to your server's IP address.
 - Allow ports 80 (HTTP), 443 (HTTPS), and 5678 (n8n) in your server's firewall.
