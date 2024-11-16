@@ -88,6 +88,8 @@ Configure Nginx to reverse proxy the n8n web interface:
             chunked_transfer_encoding off;
             proxy_buffering off;
             proxy_cache off;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
         }
     }
     ```
