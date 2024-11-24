@@ -80,7 +80,7 @@ Configure Nginx to reverse proxy the n8n web interface:
     ```bash
     server {
         listen 80;
-        server_name your-domain.com;
+        server_name your-domain.com; // subdomain.your-domain.com if you have a subdomain
 
         location / {
             proxy_pass http://localhost:5678;
@@ -97,7 +97,9 @@ Configure Nginx to reverse proxy the n8n web interface:
 
 3. **Enable the Configuration:**
     ```bash
-    sudo ln -s /etc/nginx/sites-available/n8n /etc/nginx/sites-enabled/
+    sudo ln -s /etc/nginx/sites-available/n8n.conf /etc/nginx/sites-enabled/
+
+    If you see the error saying /etc/nginx/sites-enabled/ doesn't exist. Create it by running: sudo mkdir /etc/nginx/sites-enabled/
 
 4. **Test the Nginx Configuration and Restart:**
     ```bash
@@ -116,9 +118,14 @@ Certbot will obtain and install an SSL certificate from Let's Encrypt.
 2. **Obtain an SSL Certificate:**
     ```bash
     sudo certbot --nginx -d your-domain.com
+    // If you have a subdomain then it will be subdomain.your-domain.com
 
 Follow the on-screen instructions to complete the SSL setup.
 Once completed, n8n will be accessible securely over HTTPS at your-domain.com.
+
+IMPORTANT: Make sure you follow the above steps in order. Step 5 will modify your /etc/nginx/sites-available/n8n.conf file to something like this:
+![image](https://github.com/user-attachments/assets/344187ec-5bcf-4d97-ad35-21b6562182e5)
+ 
 
 ## How to update n8n:
 
