@@ -29,7 +29,7 @@ Youtube Video Explanation: https://www.youtube.com/watch?v=Temh_Ddxp24
 
 Run the following command to start n8n in Docker. Replace your-domain.com with your actual domain name:
 
-    ```bash
+    
     sudo docker run -d --restart unless-stopped -it \
     --name n8n \
     -p 5678:5678 \
@@ -42,7 +42,7 @@ Run the following command to start n8n in Docker. Replace your-domain.com with y
 
 Or if you are using a subdomain, it should look like this:
 
-    ```bash
+    
     sudo docker run -d --restart unless-stopped -it \
     --name n8n \
     -p 5678:5678 \
