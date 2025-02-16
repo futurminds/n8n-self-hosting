@@ -38,7 +38,7 @@ Run the following command to start n8n in Docker. Replace your-domain.com with y
     -e WEBHOOK_URL="https://your-domain.com/" \
     -v ~/.n8n:/root/.n8n \
     n8nio/n8n
-    ```
+    
 
 Or if you are using a subdomain, it should look like this:
 
@@ -51,7 +51,7 @@ Or if you are using a subdomain, it should look like this:
     -e WEBHOOK_URL="https://subdomain.your-domain.com/" \
     -v ~/.n8n:/root/.n8n \
     n8nio/n8n
-    ```
+    
 
 
 This command does the following:
