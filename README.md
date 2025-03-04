@@ -76,7 +76,7 @@ Configure Nginx to reverse proxy the n8n web interface:
 
 1. **Create a New Nginx Configuration File:**
     ```bash
-    sudo nano /etc/nginx/sites-available/n8n
+    sudo nano /etc/nginx/sites-available/n8n.conf
 
 2. **Paste the Following Configuration:**
     ```bash
