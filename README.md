@@ -76,13 +76,13 @@ Configure Nginx to reverse proxy the n8n web interface:
 
 1. **Create a New Nginx Configuration File:**
     ```bash
-    sudo nano /etc/nginx/sites-available/n8n
+    sudo nano /etc/nginx/sites-available/n8n.conf
 
 2. **Paste the Following Configuration:**
     ```bash
     server {
         listen 80;
-        server_name your-domain.com; // subdomain.your-domain.com if you have a subdomain
+        server_name your-domain.com; # subdomain.your-domain.com if you have a subdomain
 
         location / {
             proxy_pass http://localhost:5678;
@@ -95,7 +95,7 @@ Configure Nginx to reverse proxy the n8n web interface:
         }
     }
     ```
-    Replace your-domain.com with your actual domain.
+    Replace your-domain.com with your actual domain. if using External IP Replace it without port
 
 3. **Enable the Configuration:**
     ```bash
