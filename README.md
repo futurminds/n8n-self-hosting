@@ -33,9 +33,9 @@ Run the following command to start n8n in Docker. Replace your-domain.com with y
     sudo docker run -d --restart unless-stopped -it \
     --name n8n \
     -p 5678:5678 \
-    -e N8N_HOST="your-domain.com" \
-    -e WEBHOOK_TUNNEL_URL="https://your-domain.com/" \
-    -e WEBHOOK_URL="https://your-domain.com/" \
+    -e N8N_HOST="your-domain.com(or)externalip:port(5678)" \
+    -e WEBHOOK_TUNNEL_URL="https://your-domain.com(or)https://externalip:port(5678)/" \
+    -e WEBHOOK_URL="https://your-domain.com(or)https://externalip:port(5678)/" \
     -v ~/.n8n:/root/.n8n \
     n8nio/n8n
     ```
