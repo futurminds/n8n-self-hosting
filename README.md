@@ -111,7 +111,7 @@ Configure Nginx to reverse proxy the n8n web interface:
 
 ## Step 5: Setting up SSL with Certbot
 
-Certbot will obtain and install an SSL certificate from Let's Encrypt.
+Certbot will obtain and install an SSL certificate from Let's Encrypt. You used to have domain to get SSL from the Domain Provider
 
 1. **Install Certbot and the Nginx Plugin:**
     ```bash
