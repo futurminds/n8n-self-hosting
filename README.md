@@ -11,25 +11,29 @@ Youtube Video Explanation: https://www.youtube.com/watch?v=Temh_Ddxp24
 1. **Update the Package Index:**
    ```bash
    sudo apt update
+   ```
 
 2. **Install Docker:**
     ```bash
     sudo apt install docker.io
+    ```
 
 3.  **Start Docker:**
     ```bash
     sudo systemctl start docker
+    ```
 
 4. **Enable Docker to Start at Boot:**
     ```bash
     sudo systemctl enable docker
+    ```
 
 
 ## Step 2: Starting n8n in Docker
 
 Run the following command to start n8n in Docker. Replace your-domain.com with your actual domain name:
 
-    ```bash
+   ```bash
     sudo docker run -d --restart unless-stopped -it \
     --name n8n \
     -p 5678:5678 \
@@ -38,11 +42,11 @@ Run the following command to start n8n in Docker. Replace your-domain.com with y
     -e WEBHOOK_URL="https://your-domain.com/" \
     -v ~/.n8n:/root/.n8n \
     n8nio/n8n
-    ```
+   ```
 
 Or if you are using a subdomain, it should look like this:
 
-    ```bash
+   ```bash
     sudo docker run -d --restart unless-stopped -it \
     --name n8n \
     -p 5678:5678 \
@@ -51,7 +55,7 @@ Or if you are using a subdomain, it should look like this:
     -e WEBHOOK_URL="https://subdomain.your-domain.com/" \
     -v ~/.n8n:/root/.n8n \
     n8nio/n8n
-    ```
+   ```
 
 
 This command does the following:
@@ -69,6 +73,7 @@ Nginx is used as a reverse proxy to forward requests to n8n and handle SSL termi
 1. **Install Nginx:**
     ```bash
     sudo apt install nginx
+    ```
 
 ## Step 4: Configuring Nginx
 
@@ -76,7 +81,8 @@ Configure Nginx to reverse proxy the n8n web interface:
 
 1. **Create a New Nginx Configuration File:**
     ```bash
-    sudo nano /etc/nginx/sites-available/n8n
+    sudo nano /etc/nginx/sites-available/n8n.conf
+    ```
 
 2. **Paste the Following Configuration:**
     ```bash
@@ -93,6 +99,17 @@ Configure Nginx to reverse proxy the n8n web interface:
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection "upgrade";
         }
+
+       location /rest/ {
+           proxy_pass http://localhost:5678;
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection "upgrade";
+           proxy_set_header Host $http_host;
+           proxy_set_header Origin $scheme://$http_host;
+           proxy_cache off;
+           proxy_buffering off;
+       }
     }
     ```
     Replace your-domain.com with your actual domain.
@@ -100,8 +117,8 @@ Configure Nginx to reverse proxy the n8n web interface:
 3. **Enable the Configuration:**
     ```bash
     sudo ln -s /etc/nginx/sites-available/n8n.conf /etc/nginx/sites-enabled/
-
-    If you see the error saying /etc/nginx/sites-enabled/ doesn't exist. Create it by running: sudo mkdir /etc/nginx/sites-enabled/
+   ```
+    If you see the error saying /etc/nginx/sites-enabled/ doesn't exist. Create it by running: `sudo mkdir /etc/nginx/sites-enabled/`
 
 4. **Test the Nginx Configuration and Restart:**
     ```bash
@@ -116,11 +133,13 @@ Certbot will obtain and install an SSL certificate from Let's Encrypt.
 1. **Install Certbot and the Nginx Plugin:**
     ```bash
     sudo apt install certbot python3-certbot-nginx
+    ```
 
 2. **Obtain an SSL Certificate:**
     ```bash
     sudo certbot --nginx -d your-domain.com
-    // If you have a subdomain then it will be subdomain.your-domain.com
+    ```
+    If you have a subdomain then it will be subdomain.your-domain.com
 
 Follow the on-screen instructions to complete the SSL setup.
 Once completed, n8n will be accessible securely over HTTPS at your-domain.com.
