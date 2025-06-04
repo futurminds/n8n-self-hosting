@@ -92,6 +92,8 @@ Configure Nginx to reverse proxy the n8n web interface:
             proxy_cache off;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection "upgrade";
+            proxy_read_timeout  3600s;   # allow up to 1 hour for long-running n8n workflows
+            proxy_send_timeout 3600s;   # allow up to 1 hour for large incoming payloads or slow triggers
         }
     }
     ```
